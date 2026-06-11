@@ -668,6 +668,16 @@ body.has-cursor-fx .cursor-fx { display: block; }
   color: var(--cyan-soft);
 }
 
+.cert-issuer {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 8px var(--cyan-dim);
+  margin-top: 0.35rem;
+}
+
 .edu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
