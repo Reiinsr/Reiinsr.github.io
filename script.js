@@ -120,8 +120,8 @@ if (cursorFx && !reducedMotion) {
   let started = false;
 
   function follow() {
-    x += (targetX - x) * 0.08;
-    y += (targetY - y) * 0.08;
+    x += (targetX - x) * 0.18;
+    y += (targetY - y) * 0.18;
     cursorFx.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     requestAnimationFrame(follow);
   }
