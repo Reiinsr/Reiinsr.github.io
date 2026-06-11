@@ -661,13 +661,6 @@ body.has-cursor-fx .cursor-fx { display: block; }
   margin-bottom: 0.5rem;
 }
 
-.cert-date {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: var(--cyan-soft);
-}
-
 .cert-issuer {
   font-family: var(--font-display);
   font-size: 0.62rem;
