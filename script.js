@@ -110,8 +110,11 @@ navLinks.querySelectorAll('a').forEach((link) =>
 
 // ===== Smooth TRON cursor =====
 const cursorFx = document.querySelector('.cursor-fx');
+// live MediaQueryList — checked per-event, not once at load, so a late-reported
+// or hot-plugged mouse still activates the cursor
+const finePointer = window.matchMedia('(pointer: fine)');
 
-if (cursorFx && window.matchMedia('(pointer: fine)').matches && !reducedMotion) {
+if (cursorFx && !reducedMotion) {
   let targetX = 0, targetY = 0;
   let x = 0, y = 0;
   let started = false;
@@ -124,6 +127,7 @@ if (cursorFx && window.matchMedia('(pointer: fine)').matches && !reducedMotion) 
   }
 
   document.addEventListener('mousemove', (e) => {
+    if (!finePointer.matches) return;
     targetX = e.clientX;
     targetY = e.clientY;
     cursorFx.classList.toggle('is-link', !!e.target.closest('a, button'));

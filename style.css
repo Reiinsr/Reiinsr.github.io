@@ -84,8 +84,9 @@ body {
   animation: cursorPulse 3.4s steps(20) infinite;
 }
 
+/* !important so element-level cursor rules (e.g. button pointer) can't leak through */
 body.has-cursor-fx,
-body.has-cursor-fx * { cursor: none; }
+body.has-cursor-fx * { cursor: none !important; }
 
 body.has-cursor-fx .cursor-fx { display: block; }
 
