@@ -117,8 +117,8 @@ if (cursorFx && window.matchMedia('(pointer: fine)').matches && !reducedMotion) 
   let started = false;
 
   function follow() {
-    x += (targetX - x) * 0.18;
-    y += (targetY - y) * 0.18;
+    x += (targetX - x) * 0.08;
+    y += (targetY - y) * 0.08;
     cursorFx.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     requestAnimationFrame(follow);
   }
@@ -126,6 +126,7 @@ if (cursorFx && window.matchMedia('(pointer: fine)').matches && !reducedMotion) 
   document.addEventListener('mousemove', (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
+    cursorFx.classList.toggle('is-link', !!e.target.closest('a, button'));
     if (!started) {
       started = true;
       x = targetX;

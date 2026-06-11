@@ -94,6 +94,19 @@ body.has-cursor-fx .cursor-fx { display: block; }
   to { background-position: -640px 0; }
 }
 
+/* Pointing-hand variant (TRONlink.ani, 18 steps); hotspot sits at the fingertip */
+.cursor-fx.is-link {
+  background-image: url('cursor/tron-link-sprite.png');
+  background-size: 576px 32px;
+  margin-left: -9px;
+  animation: cursorPulseLink 1.5s steps(18) infinite;
+}
+
+@keyframes cursorPulseLink {
+  from { background-position: 0 0; }
+  to { background-position: -576px 0; }
+}
+
 /* ===== Nav ===== */
 .nav {
   position: fixed;
@@ -106,9 +119,8 @@ body.has-cursor-fx .cursor-fx { display: block; }
 }
 
 .nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0.85rem 1.5rem;
+  /* full-bleed: logo hugs the left edge, links hug the right on wide screens */
+  padding: 0.85rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
