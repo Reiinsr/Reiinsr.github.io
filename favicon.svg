@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#02060c"/>
+  <rect x="3" y="3" width="58" height="58" rx="6" fill="none" stroke="#00e5ff" stroke-opacity="0.45" stroke-width="2"/>
+  <!-- "DN" outlines from the TRON typeface -->
+  <g transform="translate(5.3 37.7) scale(0.0234)" fill="#00e5ff">
+    <path d="M984 -502Q984 -390 917 -274Q857 -165 762.5 -90.5Q668 -16 586 -16H115V-223H438Q582 -223 668 -288Q763 -360 763 -502Q763 -569 704 -666Q633 -782 547 -782H115V-987H586Q652 -987 760 -912Q847 -840 900 -778Q984 -638 984 -502Z M1670 -501H1963V-987H2169V-15ZM1654 -501H1361V-15H1155V-987Z"/>
+  </g>
+  <rect x="14" y="46" width="36" height="3" fill="#00e5ff" fill-opacity="0.8"/>
+</svg>
