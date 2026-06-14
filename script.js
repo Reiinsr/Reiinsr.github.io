@@ -1,5 +1,112 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ===== Boot intro (Grid terminal) =====
+// Plays once per session; the <head> script already gated reduced-motion / seen visitors.
+(function bootIntro() {
+  if (!document.documentElement.classList.contains('booting')) return;
+  const boot = document.querySelector('.boot-overlay');
+  if (!boot) {
+    document.documentElement.classList.remove('booting');
+    return;
+  }
+  try { sessionStorage.setItem('grid-booted', '1'); } catch (e) {}
+
+  const screen = boot.querySelector('.boot-screen');
+  screen.innerHTML = '';
+  let aborted = false, closed = false;
+  const timers = [];
+
+  const sleep = (ms) => new Promise((res) => {
+    if (aborted) return res();
+    timers.push(setTimeout(res, ms));
+  });
+
+  const line = (cls) => {
+    const d = document.createElement('div');
+    d.className = 'boot-line' + (cls ? ' ' + cls : '');
+    screen.appendChild(d);
+    return d;
+  };
+
+  const addCaret = (el) => {
+    const c = document.createElement('span');
+    c.className = 'boot-caret';
+    c.textContent = '_';
+    el.appendChild(c);
+    return c;
+  };
+
+  const type = async (el, text, delay) => {
+    for (const ch of text) {
+      if (aborted) return;
+      el.appendChild(document.createTextNode(ch));
+      await sleep(delay);
+    }
+  };
+
+  function endBoot() {
+    if (closed) return;
+    closed = true;
+    boot.classList.add('done');
+    const cleanup = () => {
+      document.documentElement.classList.remove('booting');
+      if (boot.parentNode) boot.remove();
+    };
+    boot.addEventListener('transitionend', cleanup, { once: true });
+    setTimeout(cleanup, 700);
+  }
+
+  function skip() {
+    if (closed) return;
+    aborted = true;
+    timers.forEach(clearTimeout);
+    endBoot();
+  }
+  window.addEventListener('keydown', skip, { once: true });
+  boot.addEventListener('click', skip, { once: true });
+
+  (async function run() {
+    const head = line();
+    const caret0 = addCaret(head);
+    await sleep(450);
+    if (aborted) return;
+    caret0.remove();
+    head.textContent = 'DANCOM SYSTEMS // GRID TERMINAL';
+    head.classList.add('boot-head');
+    await sleep(150);
+
+    line().textContent = 'booting kernel ............ OK';
+    await sleep(160);
+    line(); // spacer
+
+    const loginLine = line();
+    loginLine.textContent = 'login: ';
+    await type(loginLine, 'dnassar', 32);
+    await sleep(130);
+
+    const pwLine = line();
+    pwLine.textContent = 'password: ';
+    await type(pwLine, '••••••••••••', 36);
+    await sleep(130);
+
+    line().textContent = 'authenticating identity disc ... OK';
+    await sleep(170);
+    line(); // spacer
+
+    line('boot-ok').textContent = '> ACCESS GRANTED';
+    await sleep(150);
+    line('boot-grid').textContent = '> GREETINGS, PROGRAM.';
+    await sleep(200);
+
+    const last = line('boot-grid');
+    last.textContent = '> establishing uplink to the grid';
+    addCaret(last);
+    await sleep(380);
+
+    if (!aborted) endBoot();
+  })();
+})();
+
 // ===== Typing effect in hero =====
 const roles = [
   'Head of Development',

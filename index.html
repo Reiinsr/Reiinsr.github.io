@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Decide before first paint whether to play the boot intro (once per session; never on reduced-motion) -->
+  <script>
+    (function () {
+      try {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = sessionStorage.getItem('grid-booted');
+        if (!reduce && !seen) document.documentElement.classList.add('booting');
+      } catch (e) {}
+    })();
+  </script>
   <title>Danny Nassar — IT & Cybersecurity Professional</title>
   <meta name="description" content="Portfolio of Danny Nassar — Head of Development, Cybersecurity & Automation Specialist based in Lebanon." />
   <meta property="og:type" content="website" />
@@ -20,9 +30,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
+
+  <!-- ===== Boot intro (Grid terminal) ===== -->
+  <div class="boot-overlay" aria-hidden="true">
+    <div class="boot-screen"><span class="boot-caret">_</span></div>
+  </div>
 
   <!-- Animated grid background -->
   <div class="grid-bg" aria-hidden="true"></div>
@@ -614,6 +629,6 @@
     <p>DANNY NASSAR © 2026 — END OF LINE<span class="cursor">_</span></p>
   </footer>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
