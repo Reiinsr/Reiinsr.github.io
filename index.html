@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 
@@ -40,6 +40,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#certs">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -203,9 +204,255 @@
       </div>
     </section>
 
+    <!-- ===== PROJECTS ===== -->
+    <section class="section" id="projects">
+      <h2 class="section-title" data-num="03">PROJECTS</h2>
+      <p class="section-intro">AI automation systems and voice agents I've designed, built, and deployed in production — orchestrated in n8n and wired to modern LLMs, voice AI, and live business data.</p>
+
+      <!-- FEATURED PROJECT — AI Strategy Deck Generator -->
+      <article class="panel project-featured reveal">
+        <div class="featured-media">
+          <img src="images/strategy-deck.png" alt="n8n Strategy Deck Generator workflow"
+               loading="lazy" onerror="this.src='images/placeholder.svg'" />
+          <span class="project-badge">Featured</span>
+        </div>
+        <div class="featured-body">
+          <h3 class="project-title">AI Strategy Deck Generator</h3>
+          <p class="featured-tagline">Compresses ~a month of strategist &amp; designer work into 20–30 minutes.</p>
+          <a class="btn btn-primary deck-btn" href="assets/AI-Strategy-Deck-Sample.pptx" download>
+            ▼ View Sample Output Deck
+          </a>
+          <p class="project-desc">
+            <span class="proj-label">Problem ·</span> Building a strategic communications proposal deck for a Dubai marketing &amp; PR consultancy took a team of strategists and designers close to a month per client.
+          </p>
+          <p class="project-desc">
+            <span class="proj-label">Build ·</span> A two-phase n8n pipeline triggered by a single email brief. <b>Phase 1 (Research):</b> a JavaScript node parses the brief and builds a research prompt sent to Anthropic Claude with web search, returning real, sourced market, competitor, and audience research as structured JSON. <b>Phase 2 (Design):</b> a second prompt drives Python (python-pptx) to design and build a polished, on-brand <code>.pptx</code> deck — section dividers, stakeholder maps, media mapping, and dynamic accent colors pulled from the research.
+          </p>
+          <p class="project-desc">
+            <span class="proj-label">Engineering ·</span> Splitting the job into two separate LLM calls with an async batch submission and a poll/wait loop cut runtime from ~45 min to 20–30 min — and deliberately worked <i>around</i> the platform's 10-minute execution cap on the starter tier, avoiding a costly plan upgrade for long-running jobs.
+          </p>
+          <p class="project-desc">
+            <span class="proj-label">Result ·</span> End-to-end deck generation with no manual research or design, delivered straight to the strategy team's inbox.
+          </p>
+
+          <div class="featured-details">
+            <figure class="detail-shot">
+              <img src="images/strategy-code-1.png" alt="Research prompt code node"
+                   loading="lazy" onerror="this.src='images/placeholder.svg'" />
+              <figcaption>Phase 1 — email parse &amp; research prompt</figcaption>
+            </figure>
+            <figure class="detail-shot">
+              <img src="images/strategy-code-2.png" alt="Design prompt code node"
+                   loading="lazy" onerror="this.src='images/placeholder.svg'" />
+              <figcaption>Phase 2 — deck design prompt</figcaption>
+            </figure>
+          </div>
+
+          <div class="tags">
+            <span class="tag">n8n</span>
+            <span class="tag">Anthropic Claude</span>
+            <span class="tag">Batch API</span>
+            <span class="tag">Web Search</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python · python-pptx</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">JSON</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="projects-grid">
+
+        <!-- Voice AI Scheduling Receptionist -->
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/voice-scheduler.png" alt="Vapi voice AI scheduling workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">Voice AI</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Voice AI Scheduling Receptionist</h3>
+            <p class="project-desc">
+              <span class="proj-label">Problem ·</span> Prospective clients had no fast way to book a meeting to scope automation, IT, or tech-consultation work.<br />
+              <span class="proj-label">Build ·</span> A Vapi voice agent backed by an n8n workflow with Get / Book / Update / Cancel tools — checks real-time availability against Google Calendar, creates or amends the event, and logs every booking to Airtable, with availability checks and friendly error handling.<br />
+              <span class="proj-label">Result ·</span> Callers schedule meetings end-to-end by voice, with zero manual coordination.
+            </p>
+            <div class="tags">
+              <span class="tag">Vapi · Voice AI</span>
+              <span class="tag">n8n</span>
+              <span class="tag">Google Calendar</span>
+              <span class="tag">Airtable</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Real Estate Outbound Call Agent -->
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/realestate-agent.png" alt="Vapi real estate outbound call workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">Voice AI</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Real Estate Outbound Call Agent</h3>
+            <p class="project-desc">
+              <span class="proj-label">Problem ·</span> Leads who'd inquired about properties weren't being followed up with fast enough to book viewings.<br />
+              <span class="proj-label">Build ·</span> A scheduled n8n workflow (daily 10am GST) that pulls new leads from Airtable and triggers a Vapi AI agent to call them back, gather what they're looking for, and book an in-person viewing with the realtor at the property. Branches on call outcome, updates lead status, and paces calls automatically.<br />
+              <span class="proj-label">Result ·</span> Hands-off lead follow-up that turns past inquiries into booked property viewings.
+            </p>
+            <figure class="card-detail">
+              <img src="images/vapi-agent.png" alt="Vapi voice assistant configuration for the outbound agent"
+                   loading="lazy" onerror="this.src='images/placeholder.svg'" />
+              <figcaption>The "Ava" Vapi agent — bilingual (EN/AR) cold-call script, model &amp; voice</figcaption>
+            </figure>
+            <div class="tags">
+              <span class="tag">Vapi · Voice AI</span>
+              <span class="tag">n8n</span>
+              <span class="tag">Airtable</span>
+              <span class="tag">REST API</span>
+              <span class="tag">Scheduled Trigger</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Broader suite -->
+      <div class="suite-head reveal">
+        <h3 class="suite-title">The Full Automation Suite</h3>
+        <p class="section-intro">
+          As Head of Development I designed and shipped an end-to-end content pipeline for a
+          communications &amp; PR consultancy — these workflows run in production alongside the projects above.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/content-drafter.png" alt="Content Auto-Drafter workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">n8n</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Content Auto-Drafter</h3>
+            <p class="project-desc">
+              Turns a PR brief (email or WhatsApp voice note) into a finished press release, op-ed, or feature.
+              Classifies the content type, pulls the client's brand tone from a context doc, generates a briefing
+              + final asset, stamps a unique 6-char task code, logs metadata, and delivers via email &amp; WhatsApp.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">OpenAI GPT</span>
+              <span class="tag">Google Docs</span><span class="tag">Airtable</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/content-feedback.png" alt="Content Feedback Implementation workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">n8n</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI Feedback &amp; Revision Loop</h3>
+            <p class="project-desc">
+              Handles the revision cycle. Takes client feedback + the task code, looks up the original content,
+              and has the AI apply the changes while preserving tone, format, and structure — then delivers the
+              revised version and appends a version row for a clean revision history.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">OpenAI GPT</span>
+              <span class="tag">Version Control</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/deliverables-tracker.png" alt="Deliverables Tracker workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">n8n</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Deliverables Tracker</h3>
+            <p class="project-desc">
+              Monitors deliverables against each client's monthly scope. Auto-finds the client sheet in Drive,
+              computes monthly totals, fires an over-delivery alert when a cap is exceeded, and runs a scheduled
+              weekly summary report every Sunday.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">Google Sheets</span>
+              <span class="tag">Scheduled</span><span class="tag">Alerts</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/social-calendar.png" alt="Social Media Calendar Generator workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">n8n</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Social Media Calendar Generator</h3>
+            <p class="project-desc">
+              Builds monthly content calendars. Pulls brand pillars and tone, analyzes the last 4 months of posts
+              with a Summary Bot to avoid repetition, generates format-diverse post ideas, and populates a slide
+              deck (one slide per deliverable) via the Google Slides API.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">OpenAI GPT</span>
+              <span class="tag">Google Slides</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel project-card reveal">
+          <div class="project-media">
+            <img src="images/gchat-dispatcher.png" alt="Google Chat Dispatcher Bot workflow"
+                 loading="lazy" onerror="this.src='images/placeholder.svg'" />
+            <span class="project-badge">n8n</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Google Chat Dispatcher Bot</h3>
+            <p class="project-desc">
+              A single conversational command interface for the whole suite. A Google Chat webhook parses the
+              command and a rules-based router fires the right workflow — press release, tracker, strategy deck,
+              calendar, or feedback — with a helpful fallback for unknown commands.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">Google Chat</span>
+              <span class="tag">Command Routing</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel project-card reveal">
+          <div class="project-media project-media--text">
+            <div class="text-card-icon">⬡</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI Captions Generator</h3>
+            <p class="project-desc">
+              Pairs with the calendar generator. Reads an approved deck slide-by-slide, pulls the client's tone
+              and brand vocabulary, and writes three on-brand caption options per post — tailored to each format
+              (hooks for video, hashtags for static, CTAs for carousels) — appended directly onto each slide.
+            </p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">OpenAI GPT</span>
+              <span class="tag">Google Slides</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <!-- ===== SKILLS ===== -->
     <section class="section" id="skills">
-      <h2 class="section-title" data-num="03">SKILLS</h2>
+      <h2 class="section-title" data-num="04">SKILLS</h2>
       <div class="skills-grid">
         <div class="panel skill-panel reveal">
           <h3 class="skill-cat">⬡ Cybersecurity</h3>
@@ -264,7 +511,7 @@
 
     <!-- ===== CERTIFICATES & EDUCATION ===== -->
     <section class="section" id="certs">
-      <h2 class="section-title" data-num="04">CERTIFICATES & EDUCATION</h2>
+      <h2 class="section-title" data-num="05">CERTIFICATES & EDUCATION</h2>
       <div class="certs-grid">
         <div class="panel cert-card reveal">
           <div class="cert-icon">◈</div>
@@ -307,7 +554,7 @@
 
     <!-- ===== CONTACT ===== -->
     <section class="section" id="contact">
-      <h2 class="section-title" data-num="05">CONTACT</h2>
+      <h2 class="section-title" data-num="06">CONTACT</h2>
       <div class="panel contact-panel reveal">
         <p class="contact-lead">// INITIATE CONNECTION</p>
         <div class="contact-grid">
