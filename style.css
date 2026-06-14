@@ -1074,20 +1074,6 @@ html.booting .boot-overlay {
   background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.18) 3px);
 }
 
-/* digitize flash as the terminal hands off to the site */
-.boot-overlay.done::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--cyan);
-  animation: bootFlash 0.4s ease forwards;
-}
-
-@keyframes bootFlash {
-  0% { opacity: 0.45; }
-  100% { opacity: 0; }
-}
-
 .boot-screen {
   font-family: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
   font-size: clamp(0.8rem, 2.4vw, 1.05rem);

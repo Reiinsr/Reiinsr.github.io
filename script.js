@@ -36,12 +36,18 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
     return c;
   };
 
-  const type = async (el, text, delay) => {
+  // Types a full line char-by-char with a trailing caret, like a live terminal.
+  const typeLine = async (text, cls, charDelay, pause, keepCaret) => {
+    const el = line(cls);
+    const caret = addCaret(el);
     for (const ch of text) {
-      if (aborted) return;
-      el.appendChild(document.createTextNode(ch));
-      await sleep(delay);
+      if (aborted) { caret.remove(); return el; }
+      caret.insertAdjacentText('beforebegin', ch);
+      await sleep(charDelay);
     }
+    if (!keepCaret) caret.remove();
+    if (pause) await sleep(pause);
+    return el;
   };
 
   function endBoot() {
@@ -66,42 +72,31 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
   boot.addEventListener('click', skip, { once: true });
 
   (async function run() {
+    // screen powers on: a lone underscore, then the header reveals
     const head = line();
     const caret0 = addCaret(head);
-    await sleep(450);
+    await sleep(550);
     if (aborted) return;
     caret0.remove();
     head.textContent = 'DANCOM SYSTEMS // GRID TERMINAL';
     head.classList.add('boot-head');
-    await sleep(150);
+    await sleep(300);
 
-    line().textContent = 'booting kernel ............ OK';
-    await sleep(160);
+    const C = 26;   // per-character typing delay
+    const P = 170;  // pause between lines
+
+    await typeLine('booting kernel ............ OK', null, C, P);
     line(); // spacer
-
-    const loginLine = line();
-    loginLine.textContent = 'login: ';
-    await type(loginLine, 'dnassar', 32);
-    await sleep(130);
-
-    const pwLine = line();
-    pwLine.textContent = 'password: ';
-    await type(pwLine, '••••••••••••', 36);
-    await sleep(130);
-
-    line().textContent = 'authenticating identity disc ... OK';
-    await sleep(170);
+    await sleep(90);
+    await typeLine('login: dnassar', null, C, P);
+    await typeLine('password: ••••••••••••', null, C, P);
+    await typeLine('authenticating identity disc ... OK', null, C, P);
     line(); // spacer
-
-    line('boot-ok').textContent = '> ACCESS GRANTED';
-    await sleep(150);
-    line('boot-grid').textContent = '> GREETINGS, PROGRAM.';
-    await sleep(200);
-
-    const last = line('boot-grid');
-    last.textContent = '> establishing uplink to the grid';
-    addCaret(last);
-    await sleep(380);
+    await sleep(90);
+    await typeLine('> ACCESS GRANTED', 'boot-ok', C, P);
+    await typeLine('> GREETINGS, PROGRAM.', 'boot-grid', C, 260);
+    await typeLine('> establishing uplink to the grid', 'boot-grid', C, 0, true);
+    await sleep(550);
 
     if (!aborted) endBoot();
   })();
