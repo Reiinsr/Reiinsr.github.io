@@ -75,28 +75,35 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
     // screen powers on: a lone underscore, then the header reveals
     const head = line();
     const caret0 = addCaret(head);
-    await sleep(550);
+    await sleep(450);
     if (aborted) return;
     caret0.remove();
     head.textContent = 'DANCOM SYSTEMS // GRID TERMINAL';
     head.classList.add('boot-head');
-    await sleep(300);
+    await sleep(220);
 
-    const C = 26;   // per-character typing delay
-    const P = 170;  // pause between lines
+    const C = 16;   // per-character typing delay (fast)
+    const P = 120;  // pause between typed lines
 
+    // typed: boot line + the login/password
     await typeLine('booting kernel ............ OK', null, C, P);
     line(); // spacer
-    await sleep(90);
+    await sleep(70);
     await typeLine('login: dnassar', null, C, P);
     await typeLine('password: ••••••••••••', null, C, P);
-    await typeLine('authenticating identity disc ... OK', null, C, P);
+
+    // after credentials, the rest snaps in (no typing)
+    line().textContent = 'authenticating identity disc ... OK';
+    await sleep(160);
     line(); // spacer
-    await sleep(90);
-    await typeLine('> ACCESS GRANTED', 'boot-ok', C, P);
-    await typeLine('> GREETINGS, PROGRAM.', 'boot-grid', C, 260);
-    await typeLine('> establishing uplink to the grid', 'boot-grid', C, 0, true);
-    await sleep(550);
+    line('boot-ok').textContent = '> ACCESS GRANTED';
+    await sleep(120);
+    line('boot-grid').textContent = '> GREETINGS, PROGRAM.';
+    await sleep(160);
+    const last = line('boot-grid');
+    last.textContent = '> establishing uplink to the grid';
+    addCaret(last);
+    await sleep(450);
 
     if (!aborted) endBoot();
   })();
